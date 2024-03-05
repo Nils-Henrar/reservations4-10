@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Artist;
+use App\Models\Locality;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -21,9 +22,10 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
+        //Artist::factory()->count(10)->create();
+
         $this->call(ArtistSeeder::class);
         $this->call(TypeSeeder::class);
-
-        //Artist::factory()->count(10)->create();
+        $this->call(LocalitySeeder::class);
     }
 }
