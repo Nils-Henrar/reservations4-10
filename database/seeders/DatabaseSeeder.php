@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call(ArtistSeeder::class);
+        $this->call(TypeSeeder::class);
 
         //Artist::factory()->count(10)->create();
     }
