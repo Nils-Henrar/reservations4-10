@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use App\Models\Locality;
 
 class LocalitySeeder extends Seeder
 {
@@ -13,10 +14,14 @@ class LocalitySeeder extends Seeder
      */
     public function run(): void
     {
-        //Villes de blegiques
-
+        /** Nous désactivons la vérification des contraintes de clés étrangères avant de vider la table, puis nous la réactivons.
+         *  Attention à  ne faire cela qu’en mode développement, pas en production.
+         */
         //empty the table first
-        DB::table('localities')->truncate();
+
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
+        Locality::truncate(); // on utiliser la table Locality pour vider la table plutôt que DB::table('localities')->truncate() car on a déjà défini le modèle Locality
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
 
         //Define the data 19 communes de Bruxelles
 

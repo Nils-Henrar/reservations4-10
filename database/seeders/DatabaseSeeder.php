@@ -4,8 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use App\Models\Artist;
-use App\Models\Locality;
+use App\Models\Role;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -24,9 +23,12 @@ class DatabaseSeeder extends Seeder
 
         //Artist::factory()->count(10)->create();
 
-        $this->call(ArtistSeeder::class);
-        $this->call(TypeSeeder::class);
-        $this->call(LocalitySeeder::class);
-        $this->call(RoleSeeder::class);
+        $this->call([
+            TypeSeeder::class,
+            LocalitySeeder::class,
+            LocationSeeder::class,
+            ArtistSeeder::class,
+            RoleSeeder::class,
+        ]);
     }
 }
