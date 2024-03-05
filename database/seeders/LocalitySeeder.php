@@ -41,5 +41,9 @@ class LocalitySeeder extends Seeder
             ['postal_code' => '1190', 'locality' => 'Forest'],
             ['postal_code' => '1200', 'locality' => 'Woluwe-Saint-Lambert'],
         ];
+
+        //Insert the data in the table
+
+        DB::table('localities')->insert($localities);
     }
 }

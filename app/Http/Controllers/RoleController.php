@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Type;
+use App\Models\Role;
 
-class TypeController extends Controller
+class RoleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,10 +14,10 @@ class TypeController extends Controller
     {
         //
 
-        $types = Type::all(); // ou Db::select('select * from types'); Db::table('types')->get();
-        return view('type.index', [
-            'types' => $types,
-            'resource' => 'types'
+        $roles = Role::all(); // ou Db::select('select * from roles'); Db::table('roles')->get();
+        return view('role.index', [
+            'roles' => $roles,
+            'resource' => 'roles'
         ]);
     }
 
@@ -26,9 +26,9 @@ class TypeController extends Controller
      */
     public function create()
     {
-        //
+        // 
 
-        return view('type.create');
+        return view('role.create');
     }
 
     /**
@@ -38,9 +38,9 @@ class TypeController extends Controller
     {
         //
 
-        $type = new Type();
-        $type->type = $request->type;
-        $type->save();
+        $role = new Role();
+        $role->role = $request->role;
+        $role->save();
     }
 
     /**
@@ -50,10 +50,10 @@ class TypeController extends Controller
     {
         //
 
-        $type = Type::find($id);
+        $role = Role::find($id);
 
-        return view('type.show', [
-            'type' => $type,
+        return view('role.show', [
+            'role' => $role,
         ]);
     }
 
@@ -63,12 +63,6 @@ class TypeController extends Controller
     public function edit(string $id)
     {
         //
-
-        $type = Type::find($id);
-
-        return view('type.edit', [
-            'type' => $type,
-        ]);
     }
 
     /**
@@ -76,13 +70,7 @@ class TypeController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        // 
-
-        $type = Type::find($id);
-        $type->type = $request->type;
-        $type->save();
-
-        return redirect()->route('type.show', ['id' => $id]);
+        //
     }
 
     /**
@@ -91,10 +79,5 @@ class TypeController extends Controller
     public function destroy(string $id)
     {
         //
-
-        $type = Type::find($id);
-        $type->delete();
-
-        return redirect()->route('type.index');
     }
 }

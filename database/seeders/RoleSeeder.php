@@ -26,5 +26,9 @@ class RoleSeeder extends Seeder
             ['role' => 'member'],
             ['role' => 'affiliate'],
         ];
+
+        //Insert the data in the table
+
+        DB::table('roles')->insert($roles);
     }
 }

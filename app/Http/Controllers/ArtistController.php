@@ -31,6 +31,8 @@ class ArtistController extends Controller
     public function create()
     {
         //
+
+        return view('artist.create');
     }
 
     /**
@@ -97,6 +99,8 @@ class ArtistController extends Controller
         $artist->firstname = $request->firstname;
         $artist->lastname = $request->lastname;
         $artist->save();
+
+        return redirect()->route('artist.show', ['id' => $artist->id]);
     }
 
     /**

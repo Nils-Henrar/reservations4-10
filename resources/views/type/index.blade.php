@@ -4,28 +4,22 @@
 
 @section ('content')
 
-<h2 class="text-2xl">Types</h2>
+<h2 class="text-2xl mt-2">Types</h2>
 
-<table class="table-fixed w-full mt-4">
-    <thead class="bg-gray-200 text-left">
-        <tr>
-            <th class="w-1/4 ...">Type</th>
-            <th class="w-1/4 ...">Actions</th>
-        </tr>
-    </thead>
-    <tbody>
+<div class="flex">
+    <a href="{{ route('type.create') }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-3 rounded mt-4 mb-4">Add a type</a>
+
+</div>
+<div class="mt-4">
+    <ul class="mt-4">
         @foreach ($types as $type)
-        <tr>
-            <td>{{ $type->type }}</td>
-            <td class="flex">
-                <a href="{{ route('type.edit', $type->id) }}" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-1 px-4 rounded mt-4 mb-4 mr-2 ">Edit</a>
-                <form action="{{ route('type.delete', $type->id) }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-3 rounded mt-4 mr-2">Delete</button>
-                </form>
-            </td>
-        </tr>
+        <li class="text-align: left mb-4">
+            <!-- lien en tailwind -->
+            <a href="{{ route('type.show', $type->id) }}" class="bg-white-500 hover:bg-gray-100 text-black font-bold py-1 px-3 rounded mt-4 mb-4 mr-2">{{ $type->type }}</a>
+        </li>
+
         @endforeach
-    </tbody>
-</table>
+    </ul>
+</div>
+
+@endsection
