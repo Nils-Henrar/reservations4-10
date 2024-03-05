@@ -27,5 +27,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ArtistSeeder::class);
         $this->call(TypeSeeder::class);
         $this->call(LocalitySeeder::class);
+        $this->call(RoleSeeder::class);
     }
 }
