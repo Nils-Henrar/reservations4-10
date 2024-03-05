@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Role;
+use App\Models\Show;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -29,6 +30,8 @@ class DatabaseSeeder extends Seeder
             LocationSeeder::class,
             ArtistSeeder::class,
             RoleSeeder::class,
+            ShowSeeder::class,
+            RepresentationSeeder::class,
         ]);
     }
 }

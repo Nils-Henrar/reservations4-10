@@ -40,6 +40,24 @@ class Location extends Model
 
     public function locality()
     {
-        return $this->belongsTo(Locality::class);
+        return $this->belongsTo(Locality::class); //belongs to est utilisé pour la relation many to one
+    }
+
+    /**
+     * Get the shows for the location.
+     */
+
+    public function shows()
+    {
+        return $this->hasMany(Show::class); //hasMany est utilisé pour la relation one to many
+    }
+
+    /**
+     * Get the representations for the location.
+     */
+
+    public function representations()
+    {
+        return $this->hasMany(Representation::class); //hasMany est utilisé pour la relation one to many
     }
 }
