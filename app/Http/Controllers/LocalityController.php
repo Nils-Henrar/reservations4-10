@@ -52,6 +52,13 @@ class LocalityController extends Controller
     {
         //
 
+        /**
+         * Display the specified resource.
+         *
+         * @param  int  $id
+         * @return \Illuminate\Http\Response
+         */
+
         $locality = Locality::find($id);
 
         return view('locality.show', [
