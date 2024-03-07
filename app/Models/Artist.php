@@ -17,4 +17,13 @@ class Artist extends Model
     protected $table = 'artists';
 
     public $timestamps = false;
+
+    /**
+     * the types that belong to the artist.
+     */
+
+    public function types()
+    {
+        return $this->belongsToMany(Type::class); //belongsToMany est utilisé pour la relation many to many
+    }
 }

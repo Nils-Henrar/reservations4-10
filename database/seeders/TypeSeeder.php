@@ -15,7 +15,9 @@ class TypeSeeder extends Seeder
     {
         //auteur, scnéographe, metteur en scène, comédien, chanteur, danseur, musicien, technicien, régisseur, costumier, maquilleur, accessoiriste
         //empty the table first
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
         DB::table('types')->truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
 
         //Define the data
 

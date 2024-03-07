@@ -16,4 +16,13 @@ class Type extends Model
     protected $table = 'types';
 
     public $timestamps = false;
+
+    /**
+     * the artists that belong to the type.
+     */
+
+    public function artists()
+    {
+        return $this->belongsToMany(Artist::class);
+    }
 }
