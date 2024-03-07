@@ -53,4 +53,13 @@ class Show extends Model
     {
         return $this->belongsTo(Location::class); //belongs to est utilisé pour la relation many to one
     }
+
+    /**
+     * Get the performances(artists in a type of collaboration) for the show.
+     */
+
+    public function artistTypes()
+    {
+        return $this->belongsToMany(ArtistType::class); //belongsToMany est utilisé pour la relation many to many
+    }
 }

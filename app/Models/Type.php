@@ -23,6 +23,6 @@ class Type extends Model
 
     public function artists()
     {
-        return $this->belongsToMany(Artist::class);
+        return $this->belongsToMany(Artist::class); //belongsToMany est utilisé pour la relation many to many
     }
 }
