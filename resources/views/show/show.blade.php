@@ -30,21 +30,21 @@
     @if ($show->location)
 
     <h3 class="text-2xl mt-12"><strong>Lieu</strong></h3>
-    <p class="mt-4">Lieu du spectacle : {{ $show->location->designation }}</p>
+    <p class="mt-4"><strong> Lieu du spectacle :</strong> {{ $show->location->designation }}</p>
 
-    <p class="mt-4">Adresse : {{ $show->location->address }},
+    <p class="mt-4"><strong> Adresse :</strong> {{ $show->location->address }},
         {{ $show->location->locality->postal_code }} {{ $show->location->locality->locality }}
     </p>
 
     @if ($show->location->website)
     <p class="mt-4">
-        Site web : <a href="{{ $show->location->website }}" class="text-blue-500 hover:text-blue-700 visited:text-purple-500">{{ $show->location->website }}</a>
+        <strong> Site web :</strong> <a href="{{ $show->location->website }}" class="text-blue-500 hover:text-blue-700 visited:text-purple-500">{{ $show->location->website }}</a>
     </p>
 
     @endif
 
     @if ($show->location->phone)
-    <p class="mt-4">Téléphone : {{ $show->location->phone }}</p>
+    <p class="mt-4"><strong> Téléphone : </strong> {{ $show->location->phone }}</p>
     @endif
 
     @endif
@@ -72,6 +72,35 @@
     @else
     <p class="mt-4">Pas de représentation pour le moment</p>
     @endif
+
+    <h2 class="text-2xl mt-12"><strong>Liste des artistes</strong></h2>
+    <!-- tri par type d'artiste en récupérant collaborateurs -->
+    <p class="mt-4"><strong> Auteur(s) : </strong>
+        @foreach($collaborateurs['auteur'] as $auteur)
+        {{ $auteur->firstname }} {{ $auteur->lastname }}
+        @if ($loop->iteration == $loop->count - 1) et
+        @elseif (!$loop->last), @endif
+        @endforeach
+    </p>
+
+    <p class="mt-4"><strong> Metteur en scène : </strong>
+        @foreach($collaborateurs['scénographe'] as $scenographe)
+        {{ $scenographe->firstname }} {{ $scenographe->lastname }}
+        @if ($loop->iteration == $loop->count - 1) et
+        @elseif (!$loop->last), @endif
+        @endforeach
+    </p>
+
+    <p class="mt-4"><strong> Distribution : </strong>
+        @foreach($collaborateurs['comédien'] as $comedien)
+        {{ $comedien->firstname }} {{ $comedien->lastname }}
+        @if ($loop->iteration == $loop->count - 1) et
+        @elseif (!$loop->last), @endif
+        @endforeach
+    </p>
+
+
+
 </article>
 
 <div class="mt-4">
