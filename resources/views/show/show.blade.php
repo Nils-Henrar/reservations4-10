@@ -7,7 +7,7 @@
 
 <article>
 
-    <h1 class="text-3xl mt-4">{{ $show->title }}</h1>
+    <h1 class="text-3xl mt-4"><strong>{{ $show->title }}</strong></h1>
 
 
 
@@ -15,10 +15,10 @@
     <p class="mt-4"><img src="{{ asset('images/'.$show->poster_url) }}" alt="{{ $show->title }}" width="200"></p>
     @endif
 
-    <p class="mt-4 md:w-1/2">{{ $show->description }}</p>
+    <p class="mt-4 md:w-1/2"><strong>Résumé : </strong>{{ $show->description }}</p>
 
 
-    <p class="mt-4">Prix : {{ $show->price }} €</p>
+    <p class="mt-4"><strong>Prix :</strong> {{ $show->price }} €</p>
 
 
     @if ($show->bookable)
@@ -29,7 +29,7 @@
 
     @if ($show->location)
 
-    <h3 class="text-xl mt-12">Lieu</h3>
+    <h3 class="text-2xl mt-12"><strong>Lieu</strong></h3>
     <p class="mt-4">Lieu du spectacle : {{ $show->location->designation }}</p>
 
     <p class="mt-4">Adresse : {{ $show->location->address }},
@@ -49,10 +49,33 @@
 
     @endif
 
-    <div class="mt-4">
-        <a href="{{ route('show.index') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded focus:outline-none focus:shadow-outline">Retour</a>
-    </div>
 
+
+    <!-- affichage des représentations -->
+
+    <h2 class="text-2xl mt-12"><strong>Liste des représentations</strong></h2>
+    @if ($show->representations->count() >= 1)
+    <ul class="mt-4">
+        @foreach ($show->representations as $representation)
+        <li class="list-disc ml-8">
+            {{ $representation->when }}
+            @if ($representation->location)
+            <span>({{ $representation->location->designation }})</span>
+            @elseif ($representation->show->location)
+            <span>({{ $representation->show->location->designation }})</span>
+            @else
+            <span>(à déterminer)</span>
+            @endif
+        </li>
+        @endforeach
+    </ul>
+    @else
+    <p class="mt-4">Pas de représentation pour le moment</p>
+    @endif
 </article>
+
+<div class="mt-4">
+    <a href="{{ route('show.index') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded focus:outline-none focus:shadow-outline">Retour</a>
+</div>
 
 @endsection

@@ -21,6 +21,15 @@
 
             <span> Prix : {{ $show->price }} € </span>
 
+            <!-- nombre de représentations -->
+            @if ($show->representations->count() ==1)
+            -<span> 1 représentation </span>
+            @elseif ($show->representations->count() > 1)
+            -<span> {{ $show->representations->count() }} représentations </span>
+            @else
+            -<span> Pas de représentation </span>
+            @endif
+
         </li>
 
         @endforeach
