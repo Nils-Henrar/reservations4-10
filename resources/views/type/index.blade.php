@@ -15,7 +15,7 @@
         @foreach ($types as $type)
         <li class="text-align: left mb-4">
             <!-- lien en tailwind -->
-            <a href="{{ route('type.show', $type->id) }}" class="bg-white-500 hover:bg-gray-100 text-black font-bold py-1 px-3 rounded mt-4 mb-4 mr-2">{{ $type->type }}</a>
+            <a href="{{ route('type.show', $type->id) }}" class="bg-white-500 hover:bg-gray-300 text-black font-bold py-1 px-3 rounded mt-4 mb-4 mr-2">{{ $type->type }}</a>
         </li>
 
         @endforeach
