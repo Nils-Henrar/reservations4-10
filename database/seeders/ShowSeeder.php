@@ -72,10 +72,10 @@ class ShowSeeder extends Seeder
         //Prepare the data
         foreach ($shows as &$data) {
             //Search the location for a given location's slug
-            $location = Location::firstWhere('slug', $data['location_slug']);
-            unset($data['location_slug']);
+            $location = Location::firstWhere('slug', $data['location_slug']); /*correspondance entre la clé 'slug' de la table locations et la clé 'location_slug' de la table shows*/
+            unset($data['location_slug']); // on supprime la clé 'location_slug' car elle ne correspond pas à une colonne de la table shows
 
-            $data['slug'] = Str::slug($data['title'], '-');
+            $data['slug'] = Str::slug($data['title'], '-'); // on génère un slug à partir du titre du spectacle
             $data['location_id'] = $location->id ?? null;
         }
         unset($data);

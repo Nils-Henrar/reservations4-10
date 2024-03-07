@@ -7,6 +7,12 @@ use App\Http\Controllers\TypeController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\LocalityController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\LocationController;
+use App\Http\Controllers\RepresentationController;
+use App\Http\Controllers\ShowController;
+
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -96,6 +102,78 @@ Route::get('/locality/{id}/edit', [LocalityController::class, 'edit'])->where('i
 Route::put('/locality/{id}', [LocalityController::class, 'update'])->where('id', '[0-9]+')->name('locality.update');
 
 Route::delete('/locality/{id}', [LocalityController::class, 'delete'])->where('id', '[0-9]+')->name('locality.delete');
+
+
+/*
+|--------------------------------------------------------------------------
+| Location Routes
+|--------------------------------------------------------------------------
+|
+| Here are the routes for the Location resource.
+|
+*/
+
+Route::get('/location', [LocationController::class, 'index'])->name('location.index');
+
+Route::get('/location/create', [LocationController::class, 'create'])->name('location.create');
+
+Route::post('/location', [LocationController::class, 'store'])->name('location.store');
+
+Route::get('/location/{id}', [LocationController::class, 'show'])->where('id', '[0-9]+')->name('location.show');
+
+Route::get('/location/{id}/edit', [LocationController::class, 'edit'])->where('id', '[0-9]+')->name('location.edit');
+
+Route::put('/location/{id}', [LocationController::class, 'update'])->where('id', '[0-9]+')->name('location.update');
+
+Route::delete('/location/{id}', [LocationController::class, 'delete'])->where('id', '[0-9]+')->name('location.delete');
+
+
+/*
+|--------------------------------------------------------------------------
+| Representation Routes
+|--------------------------------------------------------------------------
+|
+| Here are the routes for the Representation resource.
+|
+*/
+
+Route::get('/representation', [RepresentationController::class, 'index'])->name('representation.index');
+
+Route::get('/representation/create', [RepresentationController::class, 'create'])->name('representation.create');
+
+Route::post('/representation', [RepresentationController::class, 'store'])->name('representation.store');
+
+Route::get('/representation/{id}', [RepresentationController::class, 'show'])->where('id', '[0-9]+')->name('representation.show');
+
+Route::get('/representation/{id}/edit', [RepresentationController::class, 'edit'])->where('id', '[0-9]+')->name('representation.edit');
+
+Route::put('/representation/{id}', [RepresentationController::class, 'update'])->where('id', '[0-9]+')->name('representation.update');
+
+Route::delete('/representation/{id}', [RepresentationController::class, 'delete'])->where('id', '[0-9]+')->name('representation.delete');
+
+/*
+|--------------------------------------------------------------------------
+| Show Routes
+|--------------------------------------------------------------------------
+|
+| Here are the routes for the Show resource.
+|
+*/
+
+Route::get('/show', [ShowController::class, 'index'])->name('show.index');
+
+Route::get('/show/create', [ShowController::class, 'create'])->name('show.create');
+
+Route::post('/show', [ShowController::class, 'store'])->name('show.store');
+
+Route::get('/show/{id}', [ShowController::class, 'show'])->where('id', '[0-9]+')->name('show.show');
+
+Route::get('/show/{id}/edit', [ShowController::class, 'edit'])->where('id', '[0-9]+')->name('show.edit');
+
+Route::put('/show/{id}', [ShowController::class, 'update'])->where('id', '[0-9]+')->name('show.update');
+
+Route::delete('/show/{id}', [ShowController::class, 'delete'])->where('id', '[0-9]+')->name('show.delete');
+
 
 
 
