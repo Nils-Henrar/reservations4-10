@@ -76,11 +76,15 @@
     <h2 class="text-2xl mt-12"><strong>Liste des artistes</strong></h2>
     <!-- tri par type d'artiste en récupérant collaborateurs -->
     <p class="mt-4"><strong> Auteur(s) : </strong>
+
         @foreach($collaborateurs['auteur'] as $auteur)
+        <!-- dump en eloquent se fait avec la méthode dd() -->
         {{ $auteur->firstname }} {{ $auteur->lastname }}
         @if ($loop->iteration == $loop->count - 1) et
-        @elseif (!$loop->last), @endif
+        @elseif (!$loop->last), @endif <!-- last est une méthode qui permet de savoir si on est à la dernière itération -->
         @endforeach
+
+        <!-- loop est une variable qui contient des informations sur la boucle en cours. -->
     </p>
 
     <p class="mt-4"><strong> Metteur en scène : </strong>
