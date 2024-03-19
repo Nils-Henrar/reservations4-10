@@ -52,4 +52,16 @@ class Representation extends Model
         return $this->belongsTo(Location::class); //belongs to est utilisé pour la relation many to one
 
     }
+
+    //relation many to many avec la table users
+
+    /**
+     * The users that belong to the representation.
+     */
+
+    public function users()
+
+    {
+        return $this->belongsToMany(User::class);
+    }
 }

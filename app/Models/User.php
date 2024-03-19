@@ -48,4 +48,19 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+
+    //Relation many to many avec la table roles
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
+
+    //relation many to many avec la table representations
+
+    public function representations()
+    {
+        return $this->belongsToMany(Representation::class);
+    }
 }

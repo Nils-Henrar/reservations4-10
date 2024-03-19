@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Artist;
+use App\Models\Representation;
 use App\Models\Role;
 use App\Models\Show;
 use Illuminate\Database\Seeder;
@@ -37,6 +38,7 @@ class DatabaseSeeder extends Seeder
             ArtistTypeShowSeeder::class,
             UserSeeder::class,
             UserRoleSeeder::class,
+            RepresentationUserSeeder::class,
         ]);
     }
 }
