@@ -62,7 +62,6 @@ class TypeController extends Controller
      */
     public function edit(string $id)
     {
-        //
 
         $type = Type::find($id);
 
@@ -76,11 +75,15 @@ class TypeController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        // 
+        // Validation des données du formulaire
+
+        $validated = $request->validate([
+            'type' => 'required|string|max:60',
+        ]);
 
         $type = Type::find($id);
-        $type->type = $request->type;
-        $type->save();
+
+        $type->update($validated);
 
         return redirect()->route('type.show', ['id' => $id]);
     }

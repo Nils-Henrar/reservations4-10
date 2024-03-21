@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Location;
+use App\Models\Locality;
 
 class LocationController extends Controller
 {
@@ -43,7 +44,6 @@ class LocationController extends Controller
      */
     public function show(string $id)
     {
-        //
 
         /**
          * Display the specified resource.
@@ -51,6 +51,7 @@ class LocationController extends Controller
          * @param  int  $id
          * @return \Illuminate\Http\Response
          */
+
 
         $location = Location::find($id); // ou Db::select('select * from locations where id = ?', [$id]); Db::table('locations')->where('id', $id)->first();
 
@@ -65,6 +66,14 @@ class LocationController extends Controller
     public function edit(string $id)
     {
         //
+
+        $location = Location::find($id);
+        $localities = Locality::all();
+
+        return view('location.edit', [
+            'location' => $location,
+            'localities' => $localities
+        ]);
     }
 
     /**
@@ -72,7 +81,19 @@ class LocationController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        //validation des données du formulaire
+
+        $validated = $request->validate([
+            'designation' => 'required|max:60',
+            'address' => 'required|max:60',
+            'website' => 'max:255',
+            'phone' => 'max:30,'
+        ]);
+
+        $location = Location::find($id);
+        $location->update($validated);
+
+        return redirect()->route('location.index');
     }
 
     /**

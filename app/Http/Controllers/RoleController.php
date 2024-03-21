@@ -63,6 +63,12 @@ class RoleController extends Controller
     public function edit(string $id)
     {
         //
+
+        $role = Role::find($id);
+
+        return view('role.edit', [
+            'role' => $role,
+        ]);
     }
 
     /**
@@ -70,7 +76,17 @@ class RoleController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // validation des données du formulaire
+
+        $validated = $request->validate([
+            'role' => 'required|max:30',
+        ]);
+
+        $role = Role::find($id);
+
+        $role->update($validated);
+
+        return redirect()->route('role.index');
     }
 
     /**
