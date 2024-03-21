@@ -7,7 +7,7 @@
 <h2 class="text-2xl mt-2">Roles</h2>
 
 <div class="flex">
-    <a href="{{ route('role.create') }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-3 rounded mt-4 mb-4">Add a role</a>
+    <a href="{{ route('role.create') }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-3 rounded mt-4 mb-4">Ajouter un rôle</a>
 </div>
 
 <div class="mt-4">

@@ -29,6 +29,12 @@ class LocationController extends Controller
     public function create()
     {
         //
+
+        $localities = Locality::all();
+
+        return view('location.create', [
+            'localities' => $localities
+        ]);
     }
 
     /**
@@ -36,7 +42,28 @@ class LocationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // validation des données du formulaire
+
+        $validated = $request->validate([
+            'designation' => 'required|max:60',
+            'address' => 'required|max:60',
+            'website' => 'max:255',
+            'phone' => 'max:30',
+            'locality_id' => 'required'
+        ]);
+
+        $location = new Location();
+
+        $location->designation = $validated['designation'];
+        $location->address = $validated['address'];
+        $location->website = $validated['website'];
+        $location->phone = $validated['phone'];
+        $location->locality_id = $validated['locality_id'];
+        $location->slug = str_replace(' ', '-', strtolower($validated['designation']));
+
+        $location->save();
+
+        return redirect()->route('location.index');
     }
 
     /**
@@ -87,7 +114,8 @@ class LocationController extends Controller
             'designation' => 'required|max:60',
             'address' => 'required|max:60',
             'website' => 'max:255',
-            'phone' => 'max:30,'
+            'phone' => 'max:30',
+            'locality_id' => 'required',
         ]);
 
         $location = Location::find($id);

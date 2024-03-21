@@ -36,11 +36,18 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //validation des données du formulaire
+
+        $validated = $request->validate([
+            'role' => 'required|max:30',
+        ]);
 
         $role = new Role();
-        $role->role = $request->role;
+
+        $role->role = $validated['role'];
         $role->save();
+
+        return redirect()->route('role.index');
     }
 
     /**

@@ -20,8 +20,8 @@
     </div>
 
     <div class="mb-4">
-        <label for="adress" class="block text-gray-700 text-sm font-bold mb-2">Adresse</label>
-        <input type="text" name="adress" id="adress" @if(old('adress')) value="{{ old('adress') }}" @else value="{{ $location->adress }}" @endif class="@error('adress') is-invalid @enderror shadow appearance-none border rounded w-full py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+        <label for="address" class="block text-gray-700 text-sm font-bold mb-2">Adresse</label>
+        <input type="text" name="address" id="address" @if(old('adress')) value="{{ old('address') }}" @else value="{{ $location->address }}" @endif class="@error('address') is-invalid @enderror shadow appearance-none border rounded w-full py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
         @error('adress')
         <div class="alert alert-danger">{{ $message }}</div>
         @enderror

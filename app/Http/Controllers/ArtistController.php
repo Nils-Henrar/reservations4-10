@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Artist;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Type;
+use Illuminate\Support\Facades\DB;
 
 class ArtistController extends Controller
 {
@@ -32,7 +34,11 @@ class ArtistController extends Controller
     {
         //
 
-        return view('artist.create');
+        $types = Type::all();
+
+        return view('artist.create', [
+            'types' => $types
+        ]);
     }
 
     /**
@@ -44,7 +50,25 @@ class ArtistController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // validation des données du formulaire
+
+        $validated = $request->validate([
+            'firstname' => 'required|max:60',
+            'lastname' => 'required|max:60',
+        ]);
+
+        $artist = new Artist();
+
+        $artist->firstname = $validated['firstname'];
+        $artist->lastname = $validated['lastname'];
+
+        $artist->save();
+
+        if ($request->has('types')) {
+            $artist->types()->attach($request->types); //attach permet d'ajouter des types à un artiste
+        }
+
+        return redirect()->route('artist.index');
     }
 
     /**
@@ -76,9 +100,11 @@ class ArtistController extends Controller
         //
 
         $artist = Artist::find($id);
+        $types = Type::all();
 
         return view('artist.edit', [
-            'artist' => $artist
+            'artist' => $artist,
+            'types' => $types
         ]);
     }
 
@@ -93,17 +119,25 @@ class ArtistController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
         // validation des données du formulaire
         $validated = $request->validate([
             'firstname' => 'required|max:60',
             'lastname' => 'required|max:60',
+            'types' => 'array'
         ]);
 
         //le formulaire est validé, on récupère l'artiste à modifier
         $artist = Artist::find($id);
 
-        $artist->update($validated);
+        //on met à jour les champs de l'artiste
+        $artist->firstname = $validated['firstname'];
+        $artist->lastname = $validated['lastname'];
 
+        //on met à jour les types de l'artiste
+        $artist->types()->sync($validated['types']);
+
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
         return redirect()->route('artist.show', ['id' => $artist->id]); // ou return view('artist.show', ['artist' => $artist]);
     }
 
