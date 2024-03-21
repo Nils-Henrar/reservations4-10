@@ -93,14 +93,18 @@ class ArtistController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        // 
+        // validation des données du formulaire
+        $validated = $request->validate([
+            'firstname' => 'required|max:60',
+            'lastname' => 'required|max:60',
+        ]);
 
+        //le formulaire est validé, on récupère l'artiste à modifier
         $artist = Artist::find($id);
-        $artist->firstname = $request->firstname;
-        $artist->lastname = $request->lastname;
-        $artist->save();
 
-        return redirect()->route('artist.show', ['id' => $artist->id]);
+        $artist->update($validated);
+
+        return redirect()->route('artist.show', ['id' => $artist->id]); // ou return view('artist.show', ['artist' => $artist]);
     }
 
     /**
