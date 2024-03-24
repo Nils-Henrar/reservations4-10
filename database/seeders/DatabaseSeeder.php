@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use App\Models\Artist;
 use App\Models\Representation;
+use App\Models\Reservation;
 use App\Models\Role;
 use App\Models\Show;
 use Illuminate\Database\Seeder;
@@ -38,7 +39,7 @@ class DatabaseSeeder extends Seeder
             ArtistTypeShowSeeder::class,
             UserSeeder::class,
             UserRoleSeeder::class,
-            RepresentationUserSeeder::class,
+            ReservationSeeder::class,
         ]);
     }
 }

@@ -64,4 +64,16 @@ class Representation extends Model
     {
         return $this->belongsToMany(User::class);
     }
+
+    //relation many to many avec la table reservations
+
+    /**
+     * The reservations that belong to the representation.
+     */
+
+    public function reservations()
+
+    {
+        return $this->hasMany(Reservation::class);
+    }
 }

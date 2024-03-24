@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use App\Models\Representation;
@@ -10,7 +9,7 @@ use App\Models\User;
 use App\Models\Show;
 use App\Models\Location;
 
-class RepresentationUserSeeder extends Seeder
+class ReservationSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -20,12 +19,12 @@ class RepresentationUserSeeder extends Seeder
         // empty the table first
 
         DB::statement('SET FOREIGN_KEY_CHECKS=0');
-        DB::table('representation_user')->truncate();
+        DB::table('reservations')->truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1');
 
         // Define data
 
-        $representationUsers = [
+        $reservations = [
             [
                 'show_slug' => 'ayiti',
                 'location_slug' => 'espace-delvaux-la-venerie',
@@ -48,36 +47,37 @@ class RepresentationUserSeeder extends Seeder
 
         //Search the representation for the given show, location and date
 
-        foreach ($representationUsers as &$representationUser) {
-            $show = Show::where('slug', $representationUser['show_slug'])->first();
+        foreach ($reservations as &$reservation) {
+            $show = Show::where('slug', $reservation['show_slug'])->first();
             // on cherche le slug du show dans la table show et on récupère la première ligne car slug est unique
 
-            $location = Location::where('slug', $representationUser['location_slug'])->first();
+            $location = Location::where('slug', $reservation['location_slug'])->first();
             // on cherche le slug de la location dans la table location et on récupère la première ligne car slug est unique
 
-            $user = User::where('login', $representationUser['user_login'])->first();
+            $user = User::where('login', $reservation['user_login'])->first();
             // on cherche le login de l'utilisateur dans la table user et on récupère la première ligne car login est unique
 
             $representation = Representation::where('show_id', $show->id)
                 ->where('location_id', $location->id)
-                ->where('when', $representationUser['representation_date'])
+                ->where('when', $reservation['representation_date'])
                 ->first();
-            // on cherche l'id du show, l'id de la location et la date de la représentation dans la table representation et on récupère la première ligne car ces trois champs sont uniques et représentent une seule représentation
+            // on cherche l'id du show, l'id de la location et la date de la représentation dans la table representation 
+            //et on récupère la première ligne car ces trois champs sont uniques et représentent une seule représentation
 
-            unset($representationUser['show_slug']);
-            unset($representationUser['location_slug']);
-            unset($representationUser['user_login']);
-            unset($representationUser['representation_date']);
+            unset($reservation['show_slug']);
+            unset($reservation['location_slug']);
+            unset($reservation['user_login']);
+            unset($reservation['representation_date']);
             // comme on a trouvé les données dans les tables show, location et user, on les supprime du tableau car elles n'existent pas dans la table representation_user
 
-            $representationUser['representation_id'] = $representation->id;
-            $representationUser['user_id'] = $user->id;
+            $reservation['representation_id'] = $representation->id;
+            $reservation['user_id'] = $user->id;
         }
 
-        unset($representationUser);
+        unset($reservation);
 
         //Insert the data in the table
 
-        DB::table('representation_user')->insert($representationUsers);
+        DB::table('reservations')->insert($reservations);
     }
 }
