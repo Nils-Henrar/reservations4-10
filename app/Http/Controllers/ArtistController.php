@@ -148,11 +148,19 @@ class ArtistController extends Controller
      * 
      * @return \Illuminate\Http\Response
      */
-    public function destroy(string $id)
+    public function delete(string $id)
     {
-        // 
+        // abaisser la contrainte de clé étrangère
+
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
+        $artist = Artist::find($id);
 
 
+        if ($artist) {
+            $artist->delete();
+        }
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
+        return redirect()->route('artist.index');
     }
 
     public function showBySlug(string $slug)
